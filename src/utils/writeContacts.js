@@ -1,16 +1,16 @@
-const {
+import {
+    promises as fs
+} from 'fs';
+import {
     PATH_DB
-} = require('../constants/contacts.cjs');
+} from '../constants/contacts.js';
 
 
 export const writeContacts = async (updatedContacts) => {
     try {
-        fs.writeFileSync(PATH_DB, JSON.stringify(contacts, null, 2), 'utf8');
+        const data = JSON.stringify(updatedContacts, null, 2);
+        await fs.writeFile(PATH_DB, data, 'utf-8');
     } catch (error) {
-        console.error('Error writing contacts:', error);
+        console.error('Error writing contacts:', error.message);
     }
-};
-
-module.exports = {
-    writeContacts
 };

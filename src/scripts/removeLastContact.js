@@ -1,18 +1,25 @@
-const {
+import {
     readContacts
-} = require('../utils/readContacts');
-const {
+} from '../utils/readContacts.js';
+import {
     writeContacts
-} = require('../utils/writeContacts');
+} from '../utils/writeContacts.js';
 
-export const removeLastContact = async () => {
-    const contacts = readContacts();
-    if (contacts.length > 0) {
-        contacts.pop();
-        writeContacts(contacts);
-        console.log('Last contact removed successfully!');
-    } else {
-        console.log('No contacts to remove.');
+const removeLastContact = async () => {
+    try {
+        const contacts = await readContacts();
+
+        if (!Array.isArray(contacts) || contacts.length === 0) {
+            console.warn('No contacts available to remove.');
+            return;
+        }
+
+        const removedContact = contacts.pop();
+        await writeContacts(contacts);
+
+        console.log('Last contact removed successfully:', removedContact);
+    } catch (error) {
+        console.error('Error removing the last contact:', error.message);
     }
 };
 

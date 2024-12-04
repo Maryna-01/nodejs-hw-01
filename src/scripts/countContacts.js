@@ -1,11 +1,22 @@
-const {
+import {
     readContacts
-} = require('../utils/readContacts');
+} from '../utils/readContacts.js';
 
-export const countContacts = async () => {
-    const contacts = readContacts();
-    console.log(`Total contacts: ${contacts.length}`);
-    return contacts.length;
-}
+const countContacts = async () => {
+    try {
+        const contacts = await readContacts();
 
-console.log(await countContacts());
+        if (!Array.isArray(contacts)) {
+            console.warn('Contacts is not an array. Defaulting to 0.');
+            console.log('Total contacts: 0');
+            return;
+        }
+
+        const total = contacts.length;
+        console.log(`Total contacts: ${total}`);
+    } catch (error) {
+        console.error('Error counting contacts:', error.message);
+    }
+};
+
+countContacts();

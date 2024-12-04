@@ -1,21 +1,33 @@
-const {
-    createFakeContact
-} = require('../utils/createFakeContact');
-const {
+import {
     readContacts
-} = require('../utils/readContacts');
-const {
+} from '../utils/readContacts.js';
+import {
     writeContacts
-} = require('../utils/writeContacts');
+} from '../utils/writeContacts.js';
+import {
+    createFakeContact
+} from '../utils/createFakeContact.js';
 
-const generateContacts = async (number) => {
-    const contacts = readContacts();
-    for (let i = 0; i < count; i++) {
-        contacts.push(createFakeContact());
+const generateContacts = async () => {
+    try {
+        let contacts = await readContacts();
+
+        if (!Array.isArray(contacts)) {
+            console.warn('Contacts is not an array. Initializing an empty array.');
+            contacts = [];
+        }
+
+        const newContact = createFakeContact();
+        console.log('Generated contact:', newContact);
+
+        contacts.push(newContact);
+
+        await writeContacts(contacts);
+
+        console.log('Contact generated and saved successfully!');
+    } catch (error) {
+        console.error('Error generating contacts:', error.message);
     }
-    writeContacts(contacts);
-    console.log(`${count} contacts added successfully!`);
-
 };
 
-generateContacts(5);
+generateContacts();

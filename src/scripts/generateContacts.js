@@ -13,18 +13,18 @@ const generateContacts = async () => {
         let contacts = await readContacts();
 
         if (!Array.isArray(contacts)) {
-            console.warn('Contacts is not an array. Initializing an empty array.');
             contacts = [];
         }
 
-        const newContact = createFakeContact();
-        console.log('Generated contact:', newContact);
+        const newContact = Array.from({
+            length: 5
+        }, createFakeContact);
 
-        contacts.push(newContact);
+        contacts.push(...newContact);
 
         await writeContacts(contacts);
 
-        console.log('Contact generated and saved successfully!');
+        console.log(contacts);
     } catch (error) {
         console.error('Error generating contacts:', error.message);
     }

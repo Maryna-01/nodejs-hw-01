@@ -7,7 +7,6 @@ const countContacts = async () => {
         const contacts = await readContacts();
 
         if (!Array.isArray(contacts)) {
-            console.warn('Contacts is not an array. Defaulting to 0.');
             console.log('Total contacts: 0');
             return;
         }

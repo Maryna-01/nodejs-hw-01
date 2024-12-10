@@ -8,4 +8,4 @@ import {
 const __dirname = fileURLToPath(new URL('.',
     import.meta.url));
 
-export const PATH_DB = resolve(__dirname, '../db/db.json');
+export const PATH_DB = resolve(__dirname, '..', 'db', 'db.json');

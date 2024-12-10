@@ -14,7 +14,7 @@ const addOneContact = async () => {
         const newContact = createFakeContact();
         contacts.push(newContact);
         await writeContacts(contacts);
-        console.log('New contact added:', newContact);
+        console.log(newContact);
     } catch (error) {
         console.error('Error adding contact:', error.message);
     }

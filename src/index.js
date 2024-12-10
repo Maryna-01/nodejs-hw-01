@@ -9,11 +9,8 @@ import {
 } from './utils/createFakeContact.js';
 
 (async () => {
-    console.log('Application is running...');
     const contacts = await readContacts();
-    console.log('Existing contacts:', contacts);
     const newContact = createFakeContact();
-    console.log('New contact:', newContact);
 
     contacts.push(newContact);
     await writeContacts(contacts);

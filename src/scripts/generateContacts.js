@@ -24,7 +24,8 @@ const generateContacts = async () => {
 
         await writeContacts(contacts);
 
-        console.log(contacts);
+
+        console.log('5 new contacts generated and saved successfully!');
     } catch (error) {
         console.error('Error generating contacts:', error.message);
     }
